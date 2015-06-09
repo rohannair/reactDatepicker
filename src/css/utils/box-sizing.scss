@@ -1,0 +1,4 @@
+// Mixin to change box model, with vendor prefixing
+@mixin box-sizing($box-model) {
+  box-sizing: $box-model;
+}

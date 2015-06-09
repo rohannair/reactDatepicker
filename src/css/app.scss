@@ -1,0 +1,500 @@
+$blue: #209FE2;
+$yellow: #F2AB07;
+$dark-gray: #252A2E;
+$med-gray: #576066;
+$light-gray: lighten(#576066, 50%);
+$white: #f1f1f1;
+
+@import 'utils/utils';
+
+html {
+  @include box-sizing(border-box);
+  @include font-smoothing(on);
+
+  text-rendering: optimizeSpeed;
+}
+
+*,
+*:before,
+*:after {
+  @include box-sizing(inherit);
+  font-family: inherit;
+}
+
+#reactEl {
+  max-width: 28em;
+  width: 100%;
+  margin: 40px auto;
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+}
+
+.dateComponent {
+    padding: 0 10px;
+}
+
+%cardShadow {
+  box-shadow: 0 1px 0 rgba(black, 0.2);
+}
+
+%card {
+  @extend %cardShadow;
+  float: left;
+  padding: 0.5em;
+}
+
+.datepicker {
+  @extend %cf;
+  width: 100%;
+  text-align: center;
+  position: relative;
+
+  display: block;
+  text-align: center;
+  color: darken($white, 80%);
+  box-shadow: 0 1px 3px rgba(black, 0.1);
+
+}
+
+.datepicker--periodSelector {
+  @extend %preventSelect;
+  @extend %card;
+
+  cursor: pointer;
+  width: 10%;
+  transition: all 0.1s ease;
+  border-right: 1px solid darken($white, 2%);
+
+  &:hover {
+    background: lighten($white, 100%);
+    // box-shadow: 0 1px 3px rgba(black, 0.4);
+    color: $blue;
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+    // box-shadow: 0 1px 1px rgba(black, 0.4);
+    color: darken($blue, 10%);
+  }
+
+  i {
+    font-size: 12px;
+    text-align: center;
+  }
+
+}
+
+.datepicker--periodSelector__disabled {
+  @extend .datepicker--periodSelector;
+
+  cursor: default;
+  background: $light-gray;
+
+  &:hover {
+    @extend %card;
+    background: $light-gray;
+    color: $dark-gray;
+  }
+
+  &:active {
+    @extend %card;
+    position: static;
+  }
+}
+
+.datepicker--range {
+  @extend %preventSelect;
+  @extend %card;
+
+  width: 80%;
+  text-align: center;
+  font-size: 1em;
+
+  cursor: pointer;
+
+  .caretHolder {
+    padding: 0 2px;
+    color: $light-gray;
+  }
+}
+
+.datepicker--toggle {
+  @extend %preventSelect;
+  @extend %card;
+
+  cursor: pointer;
+  border-left: 1px solid darken($white, 2%);
+  transition: all 0.1s ease;
+  border-right: 1px solid darken($white, 2%);
+
+  &.active {
+    background: $blue;
+    color: $white;
+  }
+}
+
+.date {
+  @include font-smoothing(off);
+  color: $blue;
+}
+
+.datepickerContainer {
+  position: relative;
+}
+
+.datepicker--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  color: $white;
+  width: 100%;
+  text-align: center;
+
+  @media (min-width:768px) {
+    width: 150%;
+  }
+}
+
+.datepicker--dropdownHeader {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  text-align: right;
+
+  i {
+    position: absolute;
+    right: 13px;
+    transform: translateX(50%);
+    top: -45%;
+    color: $dark-gray;
+    font-size: 1.5em;
+  }
+}
+
+.datepicker--dropdownBody {
+  @extend %cf;
+}
+
+.datepicker--quickSelector {
+  @extend %cardShadow;
+  float:right;
+  padding: 10px;
+  background: $dark-gray;
+  width: 100%;
+
+  @media (min-width:768px) {
+    width: 33%;
+  }
+}
+
+.datepicker--calendarContainer {
+  @extend %cf;
+  position: relative;
+  float: left;
+}
+
+.datepicker--dateranges {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    $liBg: $med-gray;
+
+    background: $liBg;
+    font-size: 1em;
+    margin: 0 0 10px;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 3px;
+    transition: all 0.1s ease;
+
+    &:hover {
+      background: lighten($liBg, 5%);
+    }
+
+    @media (min-width:768px) {
+      padding: 7px 5px;
+      font-size: 0.8125em;
+    }
+  }
+
+}
+
+.datepicker--optionrange {
+  // @extend %preventSelect;
+}
+
+.datepicker--rangeForm {
+  @extend %cf;
+
+  .unselected {
+    background: $light-gray;
+    border: 2px solid transparent;
+  }
+
+  .selected {
+    background: white;
+    border: 2px solid $blue;
+    box-shadow: 0 0 3px rgba(lighten($blue, 20%), 0.8);
+  }
+}
+
+.datepicker--rangeTempl {
+  padding: 5px;
+
+  label {
+    text-align: left;
+    display: block;
+    font-size: 0.75em;
+  }
+
+  button, input {
+    @include font-smoothing(off);
+    @extend %card;
+
+    border: 0;
+    width: 100%;
+    border-radius: 3px;
+    background: lighten($med-gray, 60%);
+    color: $med-gray;
+    font-size: 1em;
+    padding: 3px 5px;
+    margin: 0 0 10px;
+  }
+
+}
+
+.datepicker--range__from {
+  @extend .datepicker--rangeTempl;
+}
+
+.datepicker--range__to {
+  @extend .datepicker--rangeTempl;
+}
+
+.datepicker--actions {
+  @extend %cf;
+  text-align: right;
+  margin-top: 10px;
+
+  .btn {
+    @include font-smoothing(off);
+    border: 0;
+    border-radius: 2px;
+    padding: 7px 20px;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    width: 50%;
+
+    @media (min-width:768px) {
+      display: inline-block;
+      padding: 3px 20px;
+    }
+  }
+
+  .btn-primary {
+    background: $blue;
+    color: $white;
+    transition: all 0.1s ease;
+
+    &:hover {
+      background: lighten($blue, 5%);
+      color: lighten($white, 5%);
+    }
+  }
+  .btn-link {
+    color: $white;
+    transition: all 0.1s ease;
+
+    &:hover {
+      color: lighten($white, 5%);
+    }
+  }
+}
+
+.datepicker--calendar {
+  @extend %cf;
+  display: none;
+
+  float: right;
+
+  color: $dark-gray;
+  width: 50%;
+  padding: 0 5px;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.datepicker--calendarHeaderContainer {
+  @extend %cf;
+
+  background: $dark-gray;
+  border: 1px solid darken($dark-gray, 10%);
+  border-bottom: 0;
+  color: $white;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px;
+}
+
+.datepicker--calendarHeader {
+  @extend %cf;
+}
+
+.datepicker--calendarBody {
+  @extend %cardShadow;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  .datepicker--calendarRow {
+    @extend %cf;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid $light-gray;
+  }
+
+  .datepicker--calendarRow__headers {
+    @extend .datepicker--calendarRow;
+    border-color: $dark-gray;
+  }
+
+  .cell {
+    @include font-smoothing(on);
+    @extend %preventSelect;
+
+    display: block;
+    float: left;
+    cursor: pointer;
+    width: (100% / 7);
+    height: 25px;
+    line-height: 25px;
+    text-align:center;
+    vertical-align: middle;
+    background: white;
+    border-right: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
+    font-size: 12px;
+
+    &:hover {
+      background: rgba($blue, 0.1);
+    }
+  }
+
+  .cell__heading {
+    @extend .cell;
+    font-weight: bold;
+    background: $med-gray;
+    border-color: $dark-gray;
+    color: $white;
+    cursor: default;
+
+    &:hover {
+      background: $med-gray;
+    }
+  }
+
+  .cell__empty {
+    $emptyCellColour: lighten($light-gray, 5%);
+    @extend .cell;
+
+    cursor: default;
+    background: $emptyCellColour;
+
+    &:hover {
+      background: $emptyCellColour;
+    }
+  }
+
+  .cell__today {
+    @extend .cell;
+  }
+
+  .cell__bookend {
+    @extend .cell;
+    @include font-smoothing(on);
+
+    background: $blue;
+    border-color: $blue;
+    color: $white;
+    font-weight: bold;
+
+    &:hover {
+      background: darken($blue, 10%);
+    }
+  }
+
+  .cell__historical {
+    @extend .cell;
+    color: $light-gray;
+  }
+
+  .cell__selected {
+    @extend .cell;
+    border-color: lighten($blue, 25%);
+    background: lighten($blue, 35%);
+  }
+
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+.datepicker--calendarHeaderContainer {
+  @extend %preserve-3d;
+  position: relative;
+  height: 100%;
+}
+
+.datepicker--calendarHeader {
+  @extend %preventSelect;
+
+  margin: 0 14%;
+}
+
+.datepicker--calendarToggle {
+  @extend %preventSelect;
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  z-index: 2;
+  cursor: pointer;
+  color: $light-gray;
+
+  &.left {
+    padding-left: 5px;
+    text-align: left;
+    left: 5px;
+  }
+
+  &.right {
+    padding-right: 5px;
+    text-align: right;
+    right: 5px;
+  }
+
+  &:active i {
+    position: relative;
+    top: 1px;
+  }
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.fa.open {
+  color: $blue;
+}
