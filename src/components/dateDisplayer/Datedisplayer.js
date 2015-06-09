@@ -48,6 +48,7 @@ const Datedisplayer = React.createClass({
 
     return (
       <div className="datepicker">
+
         <DatedisplayerArrow
           key="prev"
           onClick={this._setEndDay}

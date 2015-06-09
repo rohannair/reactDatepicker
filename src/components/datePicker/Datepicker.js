@@ -56,7 +56,6 @@ const Datepicker = React.createClass({
       .startOf('day')
       .toDate();
 
-
     if (period.val > 1) {
       let startDay = moment(endDay)
         .subtract(period.val, period.dur)
@@ -129,8 +128,29 @@ const Datepicker = React.createClass({
   },
 
   _setMobileDate(e) {
-    console.log(e);
-    debugger;
+    let date = moment(e.target.valueAsDate)
+      .startOf('day')
+      .add(1, 'day')
+      .toDate();
+
+    let newState = {};
+    let dayDiff;
+
+    if (e.target.name === 'start') {
+      dayDiff = moment(this.state.endDay).diff(moment(date), 'days');
+      newState.startDay = date;
+    } else if (e.target.name === 'end') {
+      dayDiff = moment(date).diff(moment(this.state.startDay), 'days');
+      newState.endDay = date;
+    }
+
+    newState.period = {
+      val: dayDiff,
+      dur: 'day'
+    }
+    newState.lastClick = e.target.name;
+
+    this.setState(newState);
   },
 
   render() {
@@ -176,6 +196,7 @@ const Datepicker = React.createClass({
         className={ this.state.lastClick === 'end' ? 'selected' : 'unselected'}
         onChange={this._setMobileDate}
         data-id='end'
+        name='start'
         value={dateFrom} />;
 
       rangeForm.dateTo = <input
@@ -183,6 +204,7 @@ const Datepicker = React.createClass({
         className={ this.state.lastClick === 'start' ? 'selected' : 'unselected'}
         onChange={this._setMobileDate}
         data-id='start'
+        name='end'
         value={dateTo} />;
     }
 

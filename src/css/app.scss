@@ -60,26 +60,35 @@ html {
   @extend %card;
 
   cursor: pointer;
-  width: 10%;
+  width: 15%;
   transition: all 0.1s ease;
   border-right: 1px solid darken($white, 2%);
+  padding: 14px 0.75em;
 
   &:hover {
     background: lighten($white, 100%);
-    // box-shadow: 0 1px 3px rgba(black, 0.4);
     color: $blue;
   }
 
   &:active {
     position: relative;
     top: 1px;
-    // box-shadow: 0 1px 1px rgba(black, 0.4);
     color: darken($blue, 10%);
   }
 
+  @media (min-width:768px) {
+    padding: 0.5em;
+    width: 10%;
+  }
+
   i {
-    font-size: 12px;
+    font-size: 1.2em;
+    line-height:1;
     text-align: center;
+
+    @media (min-width:768px) {
+      font-size: 12px;
+    }
   }
 
 }
@@ -106,11 +115,17 @@ html {
   @extend %preventSelect;
   @extend %card;
 
-  width: 80%;
+  width: 70%;
   text-align: center;
   font-size: 1em;
 
   cursor: pointer;
+  padding: 14px 0.75em;
+
+  @media (min-width:768px) {
+    padding: 0.5em;
+    width: 80%;
+  }
 
   .caretHolder {
     padding: 0 2px;
@@ -191,38 +206,48 @@ html {
   @extend %cf;
   position: relative;
   float: left;
+
+  @media (min-width:768px) {
+    width: 67%;
+  }
 }
 
 .datepicker--dateranges {
+  @extend %cf;
+
   list-style-type: none;
   margin: 0;
   padding: 0;
-
-  li {
-    $liBg: $med-gray;
-
-    background: $liBg;
-    font-size: 1em;
-    margin: 0 0 10px;
-    cursor: pointer;
-    padding: 10px 5px;
-    border-radius: 3px;
-    transition: all 0.1s ease;
-
-    &:hover {
-      background: lighten($liBg, 5%);
-    }
-
-    @media (min-width:768px) {
-      padding: 7px 5px;
-      font-size: 0.8125em;
-    }
-  }
-
 }
 
 .datepicker--optionrange {
-  // @extend %preventSelect;
+  $liBg: $med-gray;
+
+  float: left;
+  background: $liBg;
+  font-size: 1em;
+  margin: 0 0 10px;
+  cursor: pointer;
+  padding: 15px 5px;
+  border-radius: 3px;
+  transition: all 0.1s ease;
+  width: 32%;
+  margin-right:2%;
+
+  &:nth-child(3) {
+    margin-right: 0;
+  }
+
+  &:hover {
+    background: lighten($liBg, 5%);
+  }
+
+  @media (min-width:768px) {
+    float: none;
+    width: 100%;
+    padding: 7px 5px;
+    font-size: 0.8125em;
+  }
 }
 
 .datepicker--rangeForm {
@@ -241,27 +266,45 @@ html {
 }
 
 .datepicker--rangeTempl {
+  @extend %cf;
   padding: 5px;
+  float:left;
+  width: 48%;
+  margin-right: 2%;
+
+  &:nth-child(2) {
+    margin-right: 0;
+  }
+
+  @media (min-width:768px) {
+    float: none;
+    width: 100%;
+    padding: 3px 5px;
+  }
 
   label {
     text-align: left;
     display: block;
-    font-size: 0.75em;
+    font-size: 0.9em;
+
+    @media (min-width:768px) {
+      font-size:0.75em;
+    }
   }
 
   button, input {
     @include font-smoothing(off);
     @extend %card;
-
-    border: 0;
     width: 100%;
+    border: 0;
     border-radius: 3px;
     background: lighten($med-gray, 60%);
     color: $med-gray;
     font-size: 1em;
-    padding: 3px 5px;
     margin: 0 0 10px;
   }
+
+
 
 }
 
@@ -282,7 +325,7 @@ html {
     @include font-smoothing(off);
     border: 0;
     border-radius: 2px;
-    padding: 7px 20px;
+    padding: 12px 20px;
     font-size: 1em;
     letter-spacing: 0.5px;
     width: 50%;
