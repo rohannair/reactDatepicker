@@ -193,17 +193,13 @@ const Datepicker = React.createClass({
 
       rangeForm.dateFrom = <input
         type='date'
-        className={ this.state.lastClick === 'end' ? 'selected' : 'unselected'}
         onChange={this._setMobileDate}
-        data-id='end'
         name='start'
         value={dateFrom} />;
 
       rangeForm.dateTo = <input
         type='date'
-        className={ this.state.lastClick === 'start' ? 'selected' : 'unselected'}
-        onChange={this._setMobileDate}
-        data-id='start'
+          onChange={this._setMobileDate}
         name='end'
         value={dateTo} />;
     }
